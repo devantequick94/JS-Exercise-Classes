@@ -50,7 +50,7 @@ class Person {
 
   eat(edible){
     if(this.stomach.length < 10){
-      this.stomach.push[edible];
+      this.stomach.push(edible);
     }
   }
   
@@ -94,8 +94,8 @@ poop(){
 
 class Car {
   constructor(model, milesPerGallon){
-  this.model;
-  this.milesPerGallon;
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
   this.tank = 0;
   this.odometer = 0;
 }
@@ -108,14 +108,14 @@ class Car {
  }
 
 drive(dist){
-  const driveableMiles = this.tank = this.milesPerGallon;
-  if(dist <= driveableMiles){
+  const drivableMiles = this.tank * this.milesPerGallon;
+  if(dist <= drivableMiles){
     this.odometer = this.odometer + dist;
     this.tank = this.tank - (dist / this.milesPerGallon);  
   }else{
-    this.odometer = this.odometer + driveableMiles
+    this.odometer = this.odometer + drivableMiles;
     this.tank = 0;
-    return 'I ran out of fuel at `${this.odometer} miles';
+    return `I ran out of fuel at ${this.odometer} miles!`;
   }
  }
 }
@@ -149,13 +149,13 @@ drive(dist){
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  constructor(name, age, location){
+  constructor({name, age, location}){
   this.name = name;
   this.age = age;
   this.location = location;
   }
   speak(){
-    return `Hello my name is ${this.name}, i am from ${this.location}`
+    return `Hello my name is ${this.name}, I am from ${this.location}`
   }
 }
 
@@ -177,6 +177,9 @@ class Instructor extends Lambdasian {
 constructor({name, age, location, specialty, favLanguage, catchPhrase})
 {
   super({name, age, location, specialty, favLanguage, catchPhrase});
+  this.name = name;
+  this.age = age;
+  this.location = location;
   this.specialty = specialty;
   this.favLanguage = favLanguage;
   this.catchPhrase = catchPhrase;
@@ -204,7 +207,21 @@ return `${student.name} receives a perfect score on ${subject}`;
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 class Student extends Lambdasian {
-   
+   constructor({name, age, location, previousBackground, className, favSubjects}){
+     super({name, age, location, previousBackground, className, favSubjects});
+     this.previousBackground = previousBackground;
+     this.className = className;
+     this.favSubjects = favSubjects;
+   }
+   listSubjects(){
+     return `Loving this ${this.favSubjects}`
+   }
+   PRAssignment(subject){
+     return `${this.name} has submitted a PR for ${subject}`;
+   }
+   sprintChallenge(subject){ 
+     return `${student.name} has begun sprint challenge on ${subject}`;
+   }
 }
 
 /*
